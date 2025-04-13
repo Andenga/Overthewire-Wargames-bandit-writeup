@@ -1,3 +1,25 @@
+<h1> Cyber Security 2025 Checklist</h1>
+<ol>
+   <li><h2>Certifications</h2></li> 
+   <li><h2>Projects</h2></li>
+   <li><h2>Internships/Volunteer</h2></li>
+   <li><h2>Open Source</h2></li>
+   <li><h2>Writting papers/scripts/reviews</h2></li>
+   <li><h2>Vlogging</h2></li>
+   <li><h2>Process/Education design</h2></li>
+
+
+
+</li>
+
+
+
+
+
+
+
+
+
 
 ## 🔐 **1. Web Application Vulnerability Assessment & Fixes**
 **Best Fit:** 🛡️ *Penetration Tester, Application Security Analyst*
