@@ -16,10 +16,10 @@ To solve level 0, you need to log into bandit0 with the password **bandit0** usi
 
 Connect with ssh by using the following command:
 
-```
+```markdown
 ssh bandit0@bandit.labs.overthewire.org -p 222
-```
 
+```
 Once it is connected you will see the below output
 
  ![alt text](images/image.png)
@@ -50,10 +50,10 @@ For this level, you need to find the password located in the readme file in the 
 
 Log into this level by using the below command
 
-```
+```markdown
 ssh bandit0@bandit.labs.overthewire.org -p 2220
-```
 
+```
 The password is the same as level 0: **bandit0**
 
 List out the contents of the file using ls.
@@ -94,83 +94,109 @@ The password you are looking for is: ************
 
 ## Level 2
 
-Link: https://overthewire.org/wargames/bandit/bandit2.html
+Link: [https://overthewire.org/wargames/bandit/bandit2.html](https://overthewire.org/wargames/bandit/bandit2.html)
 
 Log into this level using the below command
 
-```
+```markdown
 ssh bandit1@bandit.labs.overthewire.org -p 2220
+
 ```
+Use the password from the previous level here; the one located in the readme file in level1.
 
-Use the password from the previous level here; the one located in the readme file in level1
 List out the content of the directory using ls
-Ls
-1.	Command breakdowns
-The command cat does not work here.  It assumes you are passing something over the standard input. You can read about cat using the commands man cat to see how it interprets a - and press q to exit once done.
-Man cat
- Hence, prepending it with a ./.
-cat ./-
-It will print out the next password
-PK8fYLZg2hnHSz83plBL1iEPKdD3QToB
 
-2.	Common mistakes
-Not logging out of the previous machine – level0, before logging into level1.
-Use the logout commands to logout first before logging into level1.
-Logout
-Save the password you will use it on level 3
+`ls`
 
-Level 3
-Link: https://overthewire.org/wargames/bandit/bandit3.html
-Challenge: The password for the next level is stored in a file called --spaces in this filename-- located in the home directory
+###	Common mistakes
+I forgot to log out of the previous machine, level0, before logging into level1.
+
+> Use the logout commands to get out of the previous level first before logging into level 1.
+> 
+> `Logout`
+
+
+The command cat does not work here. It assumes you are passing something over the standard input. You can read about cat using the commands man cat to see how it interprets a - and press q to exit once done.
+
+`Man cat`
+
+ Hence, when you prepend it with a ./. it will print out the next password
+
+`cat ./-`
+
+
+## Level 3
+
+Link: [https://overthewire.org/wargames/bandit/bandit3.html](https://overthewire.org/wargames/bandit/bandit3.html)
+
 Log into this level using this command
+
+
+```markdown
 ssh bandit2@bandit.labs.overthewire.org -p 2220
-The password is the one you found on level 2
+
+```
+The password is the one you found on level 2.
+
 List out the contents of this directlory using ls
-Ls 
+
+`ls` 
 
 Using the same commands as level 2 will not work here and neither will the command cat.
-The secret here is to stop option parsing and quote/escape the filename. This can be done by the below command
+
+The secret here is to stop option parsing and quote/escape the filename. This can be done using the below command:
+
+```markdown
 cat -- "--spaces in this filename--"
-1.	Common mistakes
-2.	 Alternative solutions
-less -- "--spaces in this filename--"
-head -- "--spaces in this filename--"
-3.	Command breakdowns
---  this tells the terminal “end of options” - that no more command-line options follow
-The quotes “” treat the name as a file name instead of different files names because of the spaces in them.
-4.	Linux concept learned
-Parsing
-Argument handling
 
-Save the password and use it on the next level
-7ZZ2LFrykP2zEyvBl4m3clcL7tGYJPME
+```
+
+###	 Alternative solutions
+
+| Command | Alternatives  |
+| -------- | :------: |
+| cat     | less, head     |
+ 
+
+###	Command breakdowns
+<ul>
+<li>--  this tells the terminal “end of options” - that no more command-line options follow</li>
+<li>The quotes “” treat the name as a file name instead of different files names because of the spaces in them.</li>
+</ul>
 
 
-Level 4
-Link: https://overthewire.org/wargames/bandit/bandit4.html
-Challenge: The password for the next level is stored in a hidden file in the inhere directory.
+## Level 4
 
-Log into this level using this commands and the password from the previous level
+Link: [https://overthewire.org/wargames/bandit/bandit4.html](https://overthewire.org/wargames/bandit/bandit4.html)
+
+
+Log into this level using this command and the password from the previous level
+
+```markdown
 ssh bandit3@bandit.labs.overthewire.org -p 2220
+
+```
 List the content of the directory using ls
-ls
+
+`ls`
+
 Enter the inhere directory using the below command
-cd
-When you list the content of the inhere directory using ls, nothing gets displayed. Hence use ls -a to list all the files in it including the hidden ones
-Ls -a
-You will find a hidden file called ...Hiding-From-You
-Read the content of the hidden file using the same logic as in the previous level
 
-1.	 Alternative solutions
-less -- "...Hiding-From-You"
-head -- "...Hiding-From-You"
-2.	Command breakdowns
-ls -a – is used to list all the contens of a directory including the hidden files as is in this case.
-3.	Linux concept learned
+`cd`
 
-xzTXq1rDJQVVAzdv5cHq1TQytTWufAMq
+When you list the content of the inhere directory using ls, nothing gets displayed. Hence I used ls -a to list all the files in it including the hidden ones
 
-Level 5
+`Ls -a`
+
+You will find a hidden file called ...Hiding-From-You. Read the content of the hidden file using the same logic as in the previous level.
+
+###	Command breakdowns
+<ul>
+<li>ls -a – is used to list all the contens of a directory including the hidden files as is in this case.</li>
+</ul>
+
+
+## Level 5
 Link: https://overthewire.org/wargames/bandit/bandit5.html
 Challenge: The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.
 
