@@ -29,7 +29,7 @@ Once it is connected you will see the below output
 I used bandit.labs.overthewire.org while logging in instead of bandit0@bandit.labs.overthewire.org.
 
 
->Notice we used bandit0@bandit.labs.overthewire.org and not bandit.labs.overthewire.org while logging in using ssh, this is because we are on level 0 and it will continue throughout the levels. We will attach bandit with the level number and place it before the host bandit.labs.overthewire.org in order to be able to login.
+>Notice we used bandit0@bandit.labs.overthewire.org and not bandit.labs.overthewire.org while logging in using ssh, this is because we are on level 0 and this pattern will continue throughout the levels except for the ones where you are expected to use ssh keys (Do not stress about this, more on this to come). We will attach bandit with the level number and place it before the host bandit.labs.overthewire.org in order to be able to login at each level.
 
 Whenever you find a password for a level, save it in a separate file and use SSH (on port 2220) to log into the next level to continue the game.
 
@@ -585,107 +585,146 @@ echo "xxx – your password here - xxx" | nc localhost 30000
 ```
 
 ## Level 16
-Link: https://overthewire.org/wargames/bandit/bandit16.html
-Challenge: The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL/TLS encryption.
+Link: [https://overthewire.org/wargames/bandit/bandit16.html](https://overthewire.org/wargames/bandit/bandit16.html)
 
-You are going to log into this level by using the same private ssh key you stored in your local machine and then using the password you retrieved in level 15 to login. Use the below command 
+
+You are going to log into this level by using the same private ssh key you stored in your local machine and then using the password you retrieved in level 15 to login.
+
+ Use the below command 
+
+```markdown
 ssh bandit15@bandit.labs.overthewire.org -p 2220 -i lvl14.key
 
-You can read the password for this level in /etc/bandit_pass/bandit15 using the cat command and then submitting it to port 30001 on localhost.  The difference between this level and level 15 is that you are connecting using TLS encryption here. 
-pbLYuZtTg4MgaqfJx8jbA9gKKGqM68A7
+```
+You can read the password for this level in /etc/bandit_pass/bandit15 using the cat command and then submitting it to port 30001 on localhost. 
+
+The difference between this level and level 15 is that you are connecting using TLS encryption here. 
+
 Here is the commands for this level
+
+```markdown
 echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" |  openssl s_client -quiet -connect localhost:30001
+```
+
+###	Command breakdowns
+<ul>
+<li>S_client - Starts OpenSSL in SSL/TLS client mode, allowing you to connect to a TLS-enabled server</li>
+<li>Quiet - Suppresses most of OpenSSL's diagnostic output (certificate details, handshake information, etc.), leaving mostly the application data. This makes it easier to interact with the server.</li>
+</ul>
 
 
-1.	Common mistakes
-2.	 Alternative solutions
-3.	Command breakdowns
-S_client - Starts OpenSSL in SSL/TLS client mode, allowing you to connect to a TLS-enabled server
-Quiet - Suppresses most of OpenSSL's diagnostic output (certificate details, handshake information, etc.), leaving mostly the application data. This makes it easier to interact with the server.
-4.	Linux concept learned
- 
-kS0Hf0u5HiXFwKMKFqXvPdOTNGGa0X8V
-Level 17
-Link: https://overthewire.org/wargames/bandit/bandit17.html
-Challenge: The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL/TLS and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.
+## Level 17
 
-You will login using the same ssh private key and password from the previous level using the below command.
+Link: [https://overthewire.org/wargames/bandit/bandit17.html](https://overthewire.org/wargames/bandit/bandit17.html)
+
+
+You will log in using the same ssh private key and password from the previous level using the below command.
+
+```markdown
 ssh bandit16@bandit.labs.overthewire.org -p 2220 -i lvl14.key
+
+```
+
 You can read the password for this level in /etc/bandit_pass/bandit16 using the cat command
-kS0Hf0u5HiXFwKMKFqXvPdOTNGGa0X8V
-I started by checking which of the ports have servers listening on them using the below Nmap’s command and then checking which one of them speak SSL/TSL and this gave me one successful port which was listening and upon pasting this levels password, I got a private key which I saved in my local machine as lvl17.key .
+
+```markdown
+cat /etc/bandit_pass/bandit16
+
+```
+
+I started by checking which of the ports have servers listening on them using the below Nmap’s command and then checking which one of them speak SSL/TSL and this gave me one successful port which was listening. 
+
+Upon pasting this levels password, I got a private key which I saved in my local machine as lvl17.key .
+
+```markdown
 nmap -p31000-32000 localhost
+
 openssl s_client -connect localhost:<port number> (Do this for all port numbers)
+
 echo "<current_password>" | openssl s_client -quiet -connect localhost:<port number> (insert the one that speaks SSL/TLS)
+```
 
-1.	Common mistakes
-2.	 Alternative solutions
-3.	Command breakdowns
-4.	Linux concept learned
+## Level 18
 
-Level 18
-Link: https://overthewire.org/wargames/bandit/bandit18.html
-Challenge: There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new
+Link: [https://overthewire.org/wargames/bandit/bandit18.html](https://overthewire.org/wargames/bandit/bandit18.html)
+
 
 You will log into this level by using the private key we got from the previous level using the below command:
+
+```markdown
 Chmod 600 lvl17.key
+
 ssh bandit17@bandit.labs.overthewire.org -p 2220 -i lvl17.key
+```
+
 list the files inside it using ls and you’ll see two files, passwords.new and passwords.old.
+
 Using the below command you should be able to see the difference between  the two passwords and the line marked by a + sign is the next level password.
+
+```markdown
 diff -u passwords.old passwords.new
-OQxXZjELndr90zuhOTDYBEomI0SZITXI
+
+```
+## Level 19
+Link: [https://overthewire.org/wargames/bandit/bandit19.html](https://overthewire.org/wargames/bandit/bandit19.html)
 
 
+Since we are logged out using ssh, using the previous format we’ve been using will print: 
 
-1.	Common mistakes
-2.	 Alternative solutions
-3.	Command breakdowns
-4.	Linux concept learned
+> ssh bandit18@bandit.labs.overthewire.org -p 2220 -i lvl17.key
+> 
+> Byebye !
+> 
+> Connection to bandit.labs.overthewire.org closed.
 
-Level 19
-Link: https://overthewire.org/wargames/bandit/bandit19.html
-Challenge: The password for the next level is stored in a file readme in the homedirectory. Unfortunately, someone has modified .bashrc to log you out when you log in with SSH.
+Hence, we will log into this level by avoiding to start .bashrc file since it has been modified, by accessing the bin/sh file directly using the below command:
 
-
-Since we are logged out using ssh, using the previous format we’ve been using will print 
-ssh bandit18@bandit.labs.overthewire.org -p 2220 -i lvl17.key
-Byebye !
-Connection to bandit.labs.overthewire.org closed.
-
-Hence, we will log into this level by avoiding to start .bashrc since it has been modified by accessing the bin/sh file directly using the below command:
+```markdown
 ssh -t bandit18@bandit.labs.overthewire.org -p 2220 /bin/sh
+
+```
 you can read the contents of the readme file and that is the password of the next level.
-KpsOfPkcP7i1FlIExk2QEjyt6dw8dxZI
 
 
+###	Command breakdowns
+<ul>
+<li>-t – starts a pseudo terminal.</li>
+</ul>
 
-1.	Common mistakes
-2.	 Alternative solutions
-3.	Command breakdowns
--t – starts a pseudo terminal.
-4.	Linux concept learned
+## Level 20
+Link: [https://overthewire.org/wargames/bandit/bandit20.html](https://overthewire.org/wargames/bandit/bandit20.html)
 
-Level 20
-Link: https://overthewire.org/wargames/bandit/bandit20.html
-Challenge: To gain access to the next level, you should use the setuid binary in the homedirectory. Execute it without arguments to find out how to use it. The password for this level can be found in the usual place (/etc/bandit_pass), after you have used the setuid binary.
 
 We are going to log into level 19 using the below ssh command and use the password we found in the previous level:
+
+```markdown
 ssh bandit19@bandit.labs.overthewire.org -p 2220
-For this level, we need to be able to access level 20 to be able to read the password at /etc/bandit_pass. Listing the content of bandit19, we will see there is a setuid file called bandit20-do in it. We will temporarily log in as bandit20-do then access the password at /etc/bandit_pass/bandit20.
+
+```
+
+For this level, we need to be able to access level 20 to be able to read the password at /etc/bandit_pass. 
+
+Listing the content of bandit19, we will see there is a setuid file called bandit20-do in it. 
+
+We will temporarily log in as bandit20-do then access the password at /etc/bandit_pass/bandit20.
+
+```markdown
 .bandit20-do whoami
-This should tell you, you are bandit20. Next you are going to read the password of bandit20 using the cat command.
+
+```
+This should tell you, you are bandit20. 
+
+Next you are going to read the password of bandit20 using the cat command.
+
+```markdown
 ./bandit20-do cat /etc/bandit_pass/bandit20
-4pIjcunZ0fK2vmp3IwfG8Vf7VhxD6pOA
+
+```
+
+## Level 21
+Link: [https://overthewire.org/wargames/bandit/bandit21.html](https://overthewire.org/wargames/bandit/bandit21.html)
 
 
-1.	Common mistakes
-2.	 Alternative solutions
-3.	Command breakdowns
-4.	Linux concept learned
-
-Level 21
-Link: https://overthewire.org/wargames/bandit/bandit21.html
-Challenge: There is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).
 
 We are going to log into level 20 using the below ssh command and use the password we found in the previous level:
 ssh bandit20@bandit.labs.overthewire.org -p 2220
