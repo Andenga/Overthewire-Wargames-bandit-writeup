@@ -22,7 +22,8 @@ ssh bandit0@bandit.labs.overthewire.org -p 222
 ```
 Once it is connected you will see the below output
 
- ![alt text](Images/image.png)
+ ![alt text](/Images/image.png)
+ 
 
 
 ### Common mistakes
