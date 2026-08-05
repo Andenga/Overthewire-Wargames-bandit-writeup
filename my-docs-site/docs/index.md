@@ -22,8 +22,9 @@ ssh bandit0@bandit.labs.overthewire.org -p 222
 ```
 Once it is connected you will see the below output
 
- ![alt text](/Images/image.png)
- 
+Welcome message
+
+![alt text](https://github.com/Andenga/Overthewire-Wargames-bandit-writeup/blob/main/my-docs-site/docs/Images/image.png)
 
 
 ### Common mistakes
