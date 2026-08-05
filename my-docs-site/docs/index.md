@@ -6,7 +6,7 @@ This article is a write-up of the [overthewire bandit wargame](https://overthewi
 
 The Bandit wargame game is free and does not need any subscription fee or payment of any form. You can support the site by [donating](https://overthewire.org/information/donate.html) and here are the [rules to consider while playing the game](https://overthewire.org/rules/).
 
-I have eradicated the passwords for the next levels using this format (***********************)
+I have eradicated the passwords for the next levels where necessary using this format (***********************)
 
 ## Level 0
 
@@ -22,7 +22,7 @@ ssh bandit0@bandit.labs.overthewire.org -p 222
 ```
 Once it is connected you will see the below output
 
- ![alt text](images/image.png)
+ ![alt text](Images/image.png)
 
 
 ### Common mistakes
@@ -1166,4 +1166,4 @@ The terminal will display the below celebratory message. We have successfully co
 > The Bandit wargame is a great shell command teacher. Give it a try if you are interested in learning how to get weird with the shell. Impress people at parties with obscure knowledge about Bash.
 
 
-Thank you for coming this far.
+Thank you for coming this far.🎉
