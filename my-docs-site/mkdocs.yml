@@ -1,0 +1,8 @@
+site_name: My Docs Site
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - My Page: somefile.
+  
