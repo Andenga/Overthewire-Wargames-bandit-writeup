@@ -903,164 +903,267 @@ seq -f "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX %4g" 0 9999 |
 
 
 ## Level 26
-Link: https://overthewire.org/wargames/bandit/bandit26.html
-Challenge: Logging in to bandit26 from bandit25 should be fairly easy… The shell for user bandit26 is not /bin/bash, but something else. Find out what it is, how it works and how to break out of it.
+Link: [https://overthewire.org/wargames/bandit/bandit26.html](https://overthewire.org/wargames/bandit/bandit26.html)
+
 
 We are going to log into level 19 using the below ssh command and use the password we found in the previous level:
+
+```markdown
 ssh bandit25@bandit.labs.overthewire.org -p 2220
+
+```
+We are going to check for level26 user's entry whose shell has been set to /usr/bin/showtext and then we will inspect the file:
+
+```markdown
 grep bandit26 /etc/passwd
 cat /usr/bin/showtext
 ssh -i bandit26.sshkey -p 2220 bandit26@bandit.labs.overthewire.org
-# Shrink terminal
-# Press v
+```
+
+We are going to shrink the terminal so that we can be able to only access content that fits the terminal's screen and if the file is longer, it will pause and wait instead of exiting. 
+
+Once paused, we will press v so that it opens the file in vim which runs with bandit26 level privileges hence bypassing the showtext restriction entirely.
+
+Once inside vim, we will make the below edits and save them.
+
+```markdown
 :set shell=/bin/bash
 :shell
+```
+
+We can now read the password for level26 using the cat command:
+
+```markdown
 cat /etc/bandit_pass/bandit26
 
-jHdv2ELQhT22BkprMNDjybZDAkw1zeBJ
+```
 
-1.	Common mistakes
-2.	 Alternative solutions
-3.	Command breakdowns
-4.	Linux concept learned
 
-Git level 27 to 31 have identical instructions, as you go, brute force your way reading the README file for sintruction to figure out where the next password could be factoring in this is a git section.
-Level 27
-Link: https://overthewire.org/wargames/bandit/bandit27.html
-Challenge: Good job getting a shell! Now hurry and grab the password for bandit27!
-While stil logged in as user bandit26, you are going to lread bandit27 password using the below command.
+
+> ***The Git level 27 to 31 have almost identical instructions, as you go, brute force your way reading the README file for intruction to figure out where the next password could be hidden and what exactly is expected of you in this git section.***
+
+## Level 27
+
+Link: [https://overthewire.org/wargames/bandit/bandit27.html](https://overthewire.org/wargames/bandit/bandit27.html)
+
+
+While stil logged in as user bandit26, you are going to read bandit27 password using the below command.
+
+```markdown
 ./bandit27-do cat /etc/bandit_pass/bandit27
 
-STJLJBRRphMxKB392CT4iOr5CbzPU9ER
+```
 
-1.	Common mistakes
-2.	 Alternative solutions
-3.	Command breakdowns
-4.	Linux concept learned
+## Level 28
+Link: [https://overthewire.org/wargames/bandit/bandit28.html](https://overthewire.org/wargames/bandit/bandit28.html)
 
-Level 28
-Link: https://overthewire.org/wargames/bandit/bandit28.html
-Challenge: There is a git repository at ssh://bandit27-git@bandit.labs.overthewire.org/home/bandit27-git/repo via the port 2220. The password for the user bandit27-git is the same as for the user bandit27.
 
-The goal of this level is to accesss the contents of the git repo given above, we are going to clone it in our local machine and use the password from level 28 to access it using the below command
+The goal of this level is to accesss the contents of the git repo given , we are going to clone it in our local machine and use the password from level 28 to access it using the below command:
+
+```markdown
 git clone ssh://bandit27-git@bandit.labs.overthewire.org:2220/home/bandit27-git/repo
-List the content of the files in the repo folder in your local machine and then read out the password for the next level
+
+```
+List the content of the files in the repo folder in your local machine and then read out the password for the next level located in the README file.
+
+```markdown
 ls repo
+
 cat repo/README
+```
 
-y8Yd2ssKcpHpud7UvOSOxwamRMzIGIeQ
 
-1.	Common mistakes
-2.	 Alternative solutions
-3.	Command breakdowns
-4.	Linux concept learned
+## Level 29
+Link: [https://overthewire.org/wargames/bandit/bandit29.html](https://overthewire.org/wargames/bandit/bandit29.html)
 
-Level 29
-Link: https://overthewire.org/wargames/bandit/bandit29.html
-Challenge: There is a git repository at ssh://bandit28-git@bandit.labs.overthewire.org/home/bandit28-git/repo via the port 2220. The password for the user bandit28-git is the same as for the user bandit28.
 
-This level is similiar to the previous one with the difeference being that the password here was deleted.
-We are going to delete the repo file from our local machine using the command 
-rm -r repo before proceeding to solve for this level.
+This level is similiar to the previous one with the diference being that the password here was deleted.
+
+We are going to first delete the repo file from our local machine using the command rm -r repo before proceeding to solve for this level.
+
+ ```markdown
+ rm -r (repo)
+ ```
+
 We are going to enter the repo folder – same as from the previous level in your local machine – and list out it’s commit history.
+
+```markdown
 git clone ssh://bandit28-git@bandit.labs.overthewire.org:2220/home/bandit28-git/repo
+
 cd repo
+
 git log –oneline
-You will see older commits of the README file
-You can read the content of the commit using git show with the commit number
+```
+
+You will see older commits of the README file.
+
+You can read the content of the commit using git show with the commit number.
+
+```markdown
 git show <commit number>
-Em7eGtqaMySwNFjCpwzzHhLhospOcdt0
+
+```
+
+## Level 30 
+Link: [https://overthewire.org/wargames/bandit/bandit30.html](https://overthewire.org/wargames/bandit/bandit30.html)
 
 
-1.	Common mistakes
-2.	 Alternative solutions
-3.	Command breakdowns
-4.	Linux concept learned
+We need to access the contents of the git repo given above, we are going to clone it in our local machine and use the password from level 29 to access it using the below command:
 
-Level 30 
-****research
-Link: https://overthewire.org/wargames/bandit/bandit30.html
-Challenge: There is a git repository at ssh://bandit29-git@bandit.labs.overthewire.org/home/bandit29-git/repo via the port 2220. The password for the user bandit29-git is the same as for the user bandit29.
-From your local machine (not the OverTheWire machine!), clone the repository and find the password for the next level. This needs git installed locally on your machine.
+We are going to clone the repository into a temporary directory:
 
-We need to access the contents of the git repo given above, we are going to clone it in our local machine and use the password from level 29 to access it using the below command
+```markdown
+cd $(mktemp -d)
+
 git clone ssh://bandit29-git@bandit.labs.overthewire.org:2220/home/bandit29-git/repo
+```
 
+The README file and the git log do not reveal the password for this level.
+
+It is possible that the password was never committed and it is in another branch. We will list the names of all git branches using the following command:
+
+```markdown
 git branch -a
+
+```
+We will then go through each branch, and we will find the password in the origin/dev branch:
+
+```markdown
 git checkout dev
+
+git log -p origin/dev
+
 cat README.md
-jq9Dfg2rXsfYsWMgFuKlXhphjdH7USgX
+```
 
-1.	Common mistakes
-2.	 Alternative solutions
-3.	Command breakdowns
-4.	Linux concept learned
 
-Level 31
-Link: https://overthewire.org/wargames/bandit/bandit31.html
-Challenge: There is a git repository at ssh://bandit30-git@bandit.labs.overthewire.org/home/bandit30-git/repo via the port 2220. The password for the user bandit30-git is the same as for the user bandit30.
+## Level 31
 
+Link: [https://overthewire.org/wargames/bandit/bandit31.html](https://overthewire.org/wargames/bandit/bandit31.html)
+
+We will start by cloning the repo in our local machine.
+
+```markdown
 git clone ssh://bandit30-git@bandit.labs.overthewire.org:2220/home/bandit30-git/repo
 
+```
+After exploring, the password for this level is neither in the git log for the main branch or any other branch. Instead, we will take a look at the git tags using git tag -l command.
+
+```markdown
 git tag
+
+```
+The above command only lists one git tag.
+
+We will view the commit message for the tag using the below command and that will display our password:
+
+
+```markdown
 git show <filename>
 
-82NkymblpGBYmIXG6ZQ8YldBYstHpfUf
+```
 
-1.	Common mistakes
-2.	 Alternative solutions
-3.	Command breakdowns
-4.	Linux concept learned
 
-Level 32
-Link: https://overthewire.org/wargames/bandit/bandit32.html
-Challenge: There is a git repository at ssh://bandit31-git@bandit.labs.overthewire.org/home/bandit31-git/repo via the port 2220. The password for the user bandit31-git is the same as for the user bandit31.
+## Level 32
 
+Link: [https://overthewire.org/wargames/bandit/bandit32.html](https://overthewire.org/wargames/bandit/bandit32.html)
+
+
+We will clone the repo in our local machine:
+
+```markdown
 git clone ssh://bandit31-git@bandit.labs.overthewire.org:2220/home/bandit31-git/repo
 
+```
+We will move into the repo using the cd comand then read the README file:
+
+
+```markdown
 cd repo
+
 cat README.md
+```
+
+We will create a file locally called key.txt and commit it to our local repository.
+
+
+
+```markdown
 echo "May I come in?" > key.txt
+
 git add -f key.txt
 
 git commit -m "Adding key.txt"
+```
+
+We will the push the changes to origin and the git commit hook in origin will give us the password for the next level.
+
+```markdown
 git push origin master
 
-pWuj5jBQ6IgV0NXwiH6g1pXRF8S1YvbT
+```
 
-1.	Common mistakes
-2.	 Alternative solutions
-3.	Command breakdowns
-4.	Linux concept learned
 
-Level 33
-Link: https://overthewire.org/wargames/bandit/bandit33.html
-Challenge: After all this git stuff, it’s time for another escape. Good luck!
-In this level, you need to escape a custom shell that turns all commands into uppercase. For example, when you run cat, the shell turns it into a CAT.
+## Level 33
+Link: [https://overthewire.org/wargames/bandit/bandit33.html](https://overthewire.org/wargames/bandit/bandit33.html)
+
+
 Connect to this level using ssh:
+
+```markdown
 ssh bandit32@bandit.labs.overthewire.org -p 2220
+
+```
 Here’s what you’re prompted with when connecting:
+
+```markdown
 $0
+
+```
+We will inquire about the current user in order to understand what level we are in: 
+
+```markdown
 whoami
+
+```
+We will the list the contents of the folder and the password is in bandit33
+
+```markdown
 ls
+
 cat /etc/bandit_pass/bandit33
+```
+
+
 The output for bandit33 is the password for the next level.
 
-u4P2CyPOwPGLe94RdD9Uo2FxFwvnFswM
+## Level 34
 
-1.	Common mistakes
-2.	 Alternative solutions
-3.	Command breakdowns
-4.	Linux concept learned
+Link : [https://overthewire.org/wargames/bandit/bandit34.html](https://overthewire.org/wargames/bandit/bandit34.html)
 
 
+We will connect to this level using ssh:
+
+```markdown
+ssh bandit33@bandit.labs.overthewire.org -p 2220
+
+```
+We will the print the README.txt file in this level’s home directory using cat command: 
+
+```markdown
+cat README.txt
+
+```
+
+The terminal will display the below celebratory message. We have successfully completed all the levels of overthewire bandit war game.
+
+> Congratulations on solving the last level of this game!
+> 
+> At this moment, there are no more levels to play in this game. However, we are constantly working on new levels and will most likely expand this game with more levels soon. Keep an eye out for an announcement on our usual communication channels! In the meantime, you could play some of our other wargames.
+> 
+> If you have an idea for an awesome new level, please let us know!
+> 
+> The Bandit wargame is a great shell command teacher. Give it a try if you are interested in learning how to get weird with the shell. Impress people at parties with obscure knowledge about Bash.
 
 
-
-
-
-
-
-
-
-
+Thank you for coming this far.
