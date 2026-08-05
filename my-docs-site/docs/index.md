@@ -725,131 +725,184 @@ Next you are going to read the password of bandit20 using the cat command.
 Link: [https://overthewire.org/wargames/bandit/bandit21.html](https://overthewire.org/wargames/bandit/bandit21.html)
 
 
-
 We are going to log into level 20 using the below ssh command and use the password we found in the previous level:
+
+```markdown
 ssh bandit20@bandit.labs.overthewire.org -p 2220
-Read the password for this level from in /etc/bandit_pass/bandit16 using the cat commands and save it.
+
+```
+
+Read the password for this level from /etc/bandit_pass/bandit16 using the cat commands and save it.
+
+```markdown
 Cat /etc/bandit_pass/bandit21
-4pIjcunZ0fK2vmp3IwfG8Vf7VhxD6pOA
-For this level, we are going to connect to a specific port using a setuid binary and send the above password, if the password matches this level’s password, it will print back the next levels password.
-You are going to open another terminal session and ssh into level 20, in one terminal you are going to start a listening server using the below command and send the password for this level
+
+```
+
+For this level, we are going to connect to a specific port using a setuid binary and send the password we found above, if the password matches this level’s password, it will print back the next levels password.
+
+You are going to open another terminal session and ssh into level 20. 
+
+In one terminal you are going to start a listening server using the below command and send the password for this level.
+
+```markdown
 nc -l -p 50000
-(50000 is a random unused port number)
+
+```
+> 50000 is a random unused port number
+
+
 In the second terminal, you are going to connect to the same port using the below command:
+
+```markdown
 ./suconnect 50000
-If the passwords, match, the terminal will print out a password for the next level.
 
-bW9kBv5WC3P4yoDyf12LSdGuNz5ka6hY
+```
+If the passwords match, the terminal will print out a password for the next level.
 
-1.	Common mistakes
-2.	 Alternative solutions
-3.	Command breakdowns
-4.	Linux concept learned
+> They should match
 
-Level 22
-Link: https://overthewire.org/wargames/bandit/bandit22.html
-Challenge: A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+## Level 22
+Link: [https://overthewire.org/wargames/bandit/bandit22.html](https://overthewire.org/wargames/bandit/bandit22.html)
 
 We are going to log into level 19 using the below ssh command and use the password we found in the previous level:
+
+```markdown
 ssh bandit21@bandit.labs.overthewire.org -p 2220
+
+```
 For this level, we need to find the location of the cron job and read it’s content by following the below steps:
+
 First, we list the content of /etc/cron.d/ then print the configuraton for bandit22
+
+```markdown
 ls /etc/cron.d/
+
 cat /etc/cron.d/cronjob_bandit22
+```
 
 From the output, we get the location for the user’s cron job at /usr/bin/cronjob_bandit22.sh then read it’s output.
+
+```markdown
 cat /usr/bin/cronjob_bandit22.sh
-From the olutput, follow the given bash instruction to list out the password in the temporary file
+
+```
+From the output, follow the given bash instruction to list out the password in the temporary file
+
+```markdown
 chmod 644 /tmp/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 cat /tmp/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-RYVux2rHEm9tiXHmLFzuR7Vhx6AZQMEz
+```
+
+###	Common mistakes
+I tried to read the content of the temp file while in the /usr/bin/ directory.
 
 
+## Level 23
+Link: [https://overthewire.org/wargames/bandit/bandit23.html](https://overthewire.org/wargames/bandit/bandit23.html)
 
-1.	Common mistakes
-Trying to read the content of the temp file while in the /usr/bin/ directory.
-2.	 Alternative solutions
-3.	Command breakdowns
-4.	Linux concept learned
-
-Level 23
-Link: https://overthewire.org/wargames/bandit/bandit23.html
-Challenge: A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
 
 We are going to log into level 19 using the below ssh command and use the password we found in the previous level:
+
+```markdown
 ssh bandit22@bandit.labs.overthewire.org -p 2220
 
+```
 This level is almost like the previous level, with the difference being the cron job invokes is a little bit more involved.
-# List all cron configurations
+
+List all cron configurations
+
+```markdown
 ls /etc/cron.d
-# Read out the cron configuration for bandit23
+
+```
+ Read out the cron configuration for bandit23
+
+```markdown
 cat /etc/cron.d/cronjob_bandit23
 
-# Read out the cron job's script:
+```
+Read out the cron job's script:
+
+```markdown
 cat /usr/bin/cronjob_bandit23.sh
-# Read out the file contents
+
+```
+Read out the file contents
+
+```markdown
 Cat /tmp/$mytarget
-Where mytarget=$(echo I am user $myname | md5sum | cut -d ' ' -f 1)
-cat /tmp/$(echo I am user bandit23 | md5sum | cut -d ' ' -f 1)
 
-gKXDTAXnIz3OBxiPjRZ2uqutUlPZrBsw
+```
+
+> Where mytarget=$(echo I am user $myname | md5sum | cut -d ' ' -f 1)
+> 
+> cat /tmp/$(echo I am user bandit23 | md5sum | cut -d ' ' -f 1)
+
+
+## Level 24
+
+Link:  [https://overthewire.org/wargames/bandit/bandit24.html](https://overthewire.org/wargames/bandit/bandit24.html)
 
 
 
+We are going to log into level 19 using the below ssh command and using the password we found in the previous level:
 
-1.	Common mistakes
-2.	 Alternative solutions
-3.	Command breakdowns
-4.	Linux concept learned
-
-Level 24
-Link:  https://overthewire.org/wargames/bandit/bandit24.html
-Challenge: A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
-We are going to log into level 19 using the below ssh command and use the password we found in the previous level:
+```markdown
 ssh bandit23@bandit.labs.overthewire.org -p 2220
 
+```
+
 In this level, you have to trick a cron job into executing your script instead.
-We will start by creating a shell script using the cat command and the redirecting the output into a temporary file that we create.
+
+We will start by creating a shell script using the cat command and then redirecting the output into a temporary file that we create.
+
+```markdown
 cat > /var/spool/bandit24/foo/cat_passwd <<EOF
 #!/bin/bash
 install --mode=444 /etc/bandit_pass/bandit24 /tmp/bandit_pass_bandit24
 EOF
+```
+
 We then change the permissions of the file we created and give it 1 minute before we read the output from the bandit_pass_bandit24 file we created earlier
+
+```markdown
 chmod +x /var/spool/bandit24/foo/cat_passwd
 sleep 60
 cat /tmp/bandit_pass_bandit24
+```
+
+###	Command breakdowns
+<ul>
+<li>Install here is used to copy the files and set permissions.</li>
+</ul>
 
 
-
-hVQMk3lJNsmQ7VF3ubyrNNBom7BOgVXv
-
-1.	Common mistakes
-2.	 Alternative solutions
-3.	Command breakdowns
-Install here is used to copy the files and set permissions.
-4.	Linux concept learned
-
-Level 25
-Link: https://overthewire.org/wargames/bandit/bandit25.html
-Challenge: A daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing.
+## Level 25
+Link: [https://overthewire.org/wargames/bandit/bandit25.html](https://overthewire.org/wargames/bandit/bandit25.html)
 
 We are going to log into level 19 using the below ssh command and use the password we found in the previous level:
-ssh bandit24@bandit.labs.overthewire.org -p 2220
-Solve this level by connecting to port 30002 on localhost and giving it the right password. The password is a combination of the last level’s password and a random 4 digit pin. The seq command is useful for brute-forcing passwords.
 
+```markdown
+ssh bandit24@bandit.labs.overthewire.org -p 
+
+```
+
+Solve this level by connecting to port 30002 on localhost and giving it the right password. 
+
+The password is a combination of the last level’s password and a random 4 digit pin. 
+
+The seq command is useful for brute-forcing passwords.
+
+
+```markdown
 seq -f "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX %4g" 0 9999 |
     socat STDIO TCP4:localhost:30002 |
     grep -v Wrong!
+```
 
 
-SoHfqMOEqIX2IYKVciZxvgpR9a2Djx4P
-
-1.	Common mistakes
-2.	 Alternative solutions
-3.	Command breakdowns
-4.	Linux concept learned
-
-Level 26
+## Level 26
 Link: https://overthewire.org/wargames/bandit/bandit26.html
 Challenge: Logging in to bandit26 from bandit25 should be fairly easy… The shell for user bandit26 is not /bin/bash, but something else. Find out what it is, how it works and how to break out of it.
 
