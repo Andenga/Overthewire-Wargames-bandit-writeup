@@ -4,7 +4,12 @@ theme:
 
 nav:
   - Home: index.md
-  - My Page: somefile
-
-
-  
+  - Level 0 ssh login basics: level 0
+  - File navigation & inspection: level 0–5
+  - Searching and filtering: level 5–9
+  - Encoding and transformations: level 9–13
+  - SSH keys, networking basics, and diffing files: level 13–17
+  - Restricted shells and setuid basics: level 18–20
+  - Cron jobs, brute-forcing, and shell escapes (GTFOBins-style): level 21–26
+  - Git and source control: level 27–32
+  - Restricted shell / sandbox escape: level 33

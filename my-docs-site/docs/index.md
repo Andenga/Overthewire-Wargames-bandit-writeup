@@ -2,15 +2,15 @@
 
 ## Introduction
 
-This article is a write-up of the [overthewire bandit wargame](https://overthewire.org/wargames/bandit/). The bandit wargame is a series in the war games on the [Overthewire](https://overthewire.org/wargames/) website that helps one learn Linux from begginers level to expertise. It contains a series of levels each one a Linux server you log into where you find the password for the next level. 
+This article is a write-up of the [overthewire bandit wargame](https://overthewire.org/wargames/bandit/). The bandit wargame is a series in the war games on the [Overthewire](https://overthewire.org/wargames/) website that helps one learn Linux from begginers level to expertise. It contains a series of levels, each one a Linux server you log into where you find the password for the next level. 
 
-The Bandit game is free and does not need any subscription fee or payment of any form. You can support the site by [donating](https://overthewire.org/information/donate.html) and here are the [rules to consider while playing the game](https://overthewire.org/rules/).
+The Bandit wargame game is free and does not need any subscription fee or payment of any form. You can support the site by [donating](https://overthewire.org/information/donate.html) and here are the [rules to consider while playing the game](https://overthewire.org/rules/).
 
-I have eradicated the passwords of the next levels using this format (**********)
+I have eradicated the passwords for the next levels using this format (***********************)
 
 ## Level 0
 
-Link to this level: https://overthewire.org/wargames/bandit/bandit0.html
+Link to this level: [https://overthewire.org/wargames/bandit/bandit0.html](https://overthewire.org/wargames/bandit/bandit0.html)
 
 To solve level 0, you need to log into bandit0 with the password **bandit0** using SSH on bandit.labels.overthewrite.org and port 2220.
 
@@ -26,7 +26,7 @@ Once it is connected you will see the below output
 
 
 ### Common mistakes
-Using bandit.labs.overthewire.org while logging in instead of bandit0@bandit.labs.overthewire.org.
+I used bandit.labs.overthewire.org while logging in instead of bandit0@bandit.labs.overthewire.org.
 
 
 >Notice we used bandit0@bandit.labs.overthewire.org and not bandit.labs.overthewire.org while logging in using ssh, this is because we are on level 0 and it will continue throughout the levels. We will attach bandit with the level number and place it before the host bandit.labs.overthewire.org in order to be able to login.
@@ -36,13 +36,14 @@ Whenever you find a password for a level, save it in a separate file and use SSH
 > Ps: The port number does not change
 
 ###	Command breakdowns
-
-ssh – This is a protocol used to securely connect to another computer over a network.
+<ul>
+<li>ssh – This is a protocol used to securely connect to another computer over a network.</li>
+</ul>
 
 
 ## Level 1
 
-Link to this level: https://overthewire.org/wargames/bandit/bandit1.html
+Link to this level: [https://overthewire.org/wargames/bandit/bandit1.html](https://overthewire.org/wargames/bandit/bandit1.html)
 
 For this level, you need to find the password located in the readme file in the home directory.
 
@@ -75,16 +76,21 @@ contribute to the OverTheWire community so we can keep these games free!
 The password you are looking for is: ************
 ````
 
-1.	 Alternative solutions
-Ls – dir, find
-Cat - less
-2.	Command breakdowns
-Ls stands for list and it is used to list the contents of directories.
-Cat stands for concatenate and it displays the contents of a file.
-3.	Linux concept learned
-ls
-cat
+### Alternative solutions
 
+
+| Command | Alternatives  |
+| -------- | :------: |
+| ls     | dir, find    |
+| cat     | less     |
+
+
+
+###	Command breakdowns
+<ul>
+<li>ls stands for list and it is used to display the contents of directories.</li>
+<li>Cat stands for concatenate and it displays the contents of a file.</li>
+</ul>
 
 ## Level 2
 
