@@ -395,6 +395,576 @@ strings data.txt | grep "^="
 <ul><li>String – it prints the human-readable part of the file.</li></ul>
 
 
+## Level 11
+
+Link: [https://overthewire.org/wargames/bandit/bandit11.html](https://overthewire.org/wargames/bandit/bandit11.html)
+
+
+Log into this level using these commands and the password from the previous level
+
+```markdown
+ssh bandit10@bandit.labs.overthewire.org -p 2220
+
+```
+We are going to decode the content of data.txt using the base64 command along with the –decode command.
+
+```markdown
+Base64 --decode data.text
+
+```
+
+###	Command breakdowns
+<ul>
+<li>base64 – it is used to encode and decode base64 file content.</li>
+<li>--decode – it reverses the encoding process</li>
+</ul>
+
+## Level 12
+
+Link: [https://overthewire.org/wargames/bandit/bandit12.html](https://overthewire.org/wargames/bandit/bandit12.html)
+
+
+Log into this level using this command and the password from the previous level
+
+```markdown
+ssh bandit11@bandit.labs.overthewire.org -p 2220
+
+```
+
+The data in the file has been ceaser-shifted using ROT13 and we need to reverse it so that we can find the password. 
+
+We can read then file the transform them 13 positions using the tr command such as:
+
+```markdown
+cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+
+```
+
+###	Command breakdowns
+<ul>
+<li>tr – transforms the read data in the specified commands.</li>
+</ul>
+
+
+You can read more about this on [ROT13 Wikipedia page](https://en.wikipedia.org/wiki/ROT13 )
+
+
+## Level 13
+
+Link: [https://overthewire.org/wargames/bandit/bandit12.html](https://overthewire.org/wargames/bandit/bandit12.html)
+
+
+Log into this level using this command and the password from the previous level
+
+```markdown
+ssh bandit12@bandit.labs.overthewire.org -p 2220
+
+```
+We  first need to create a temporary directory and copy the content of data.txt into it so that we can work from there.
+
+ Using the file type command, we are going to decode the file until it gives us ascii data type and that will be our password.
+
+
+Create a temporary directory:
+
+`mktemp -d
+`
+
+move into the temp directory using 
+
+`cd`
+
+copy the data.txt into it using 
+
+`cp ~/data.txt .`
+
+We have been told the format of the file is a hexdump, hence we decompress and save it in a new file called workingdata is using:
+
+```markdown
+xxd -r data.txt > workingdata
+
+```
+then we check the type of working data using the command
+
+`file workingdata
+`
+
+It is a gzip compressed file, we will first rename the file to a .gzip file so that we can be able to decopress it using:
+
+```markdown
+mv workingdata  workingdata.gz
+
+```
+> The command mv renames the file
+> 
+
+we then decompress it using the gunzip commands
+
+```markdown
+gunzip workingdata.gz
+
+```
+We then check the type of the new file created using the file commands, it is a bzip2 file.
+
+We will convert it using the same process and below is a list of commands to use for different data types until you find the answer:
+
+| Data Type | Extension | Command |
+| -------- | -------- | -------- |
+| Hexadecimal   | hex  | xxd -r  |
+| Gzip   | gz   | gunzip   |
+| Bzip2  | bz2   | bunzip2  |
+| Posix   | tar   | tar -xf   |
+
+
+###	Common mistakes
+Using the wrong format to decode the different file types.
+
+Forgetting to direct the copied data.txt file into the right temporary made directory.
+
+Not renaming the files to have the right file type extension before decoding them.
+
+> Adding a fullstop at the end of the file name tells the terminal to copy the file in the directory you are currently at.
+
+
+## Level 14
+Link: [https://overthewire.org/wargames/bandit/bandit14.html](https://overthewire.org/wargames/bandit/bandit14.html)
+
+
+Log into this level using this commands and the password from the previous level
+
+```markdown
+ssh bandit13@bandit.labs.overthewire.org -p 2220
+
+```
+
+In this level, all you need to do is extract the content of the sshkey.private and store it in your local machine in a new file
+
+You can start by listing the available files using the list command and then reading the content of the sshkey.private file using the cat command. 
+
+The easiest way is to copy and paste the contents into a new file on your local machine using the nano command then saving it. 
+
+Exit the bandit workspace and save the file in your machine locally. Your new file must have the .key extension.
+
+```python
+Ls 
+Cat sshkey.private
+nano lvl4.key
+```
+
+## Level 15
+
+Link: [https://overthewire.org/wargames/bandit/bandit15.html](https://overthewire.org/wargames/bandit/bandit15.html)
+
+
+To access this level you are going to use the private key you stored in your local machine in the  previous level.
+
+Fist you need to change the mode of the file, mine is called lvl14.key, using the command chmod 600 command and then logging in using the same format but appending the key at the end to be used as the password.
+
+```markdown
+chmod 600 lvl4.key
+
+```
+```markdown
+ssh bandit14@bandit.labs.overthewire.org -p 2220 -i lvl14.key
+
+```
+The password for each file are stored in the /etc/bandit_pass directory and it can only be accessed by the user in that directory, i.e, bandit14 can only be accessed while logged in at level 14.
+
+```markdown
+cd /etc/bandit_pass
+
+```
+Reading the content of the file at /etc/bandit_pass/bandit14, you will be able to access the password that was being referred in level 14 becuase now you are logged in as user14.
+
+
+After reading the  password, use the commands nc to pass it to port 30000 on localhost.
+
+```markdown
+echo "xxx – your password here - xxx" | nc localhost 30000
+
+```
+
+## Level 16
+Link: https://overthewire.org/wargames/bandit/bandit16.html
+Challenge: The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL/TLS encryption.
+
+You are going to log into this level by using the same private ssh key you stored in your local machine and then using the password you retrieved in level 15 to login. Use the below command 
+ssh bandit15@bandit.labs.overthewire.org -p 2220 -i lvl14.key
+
+You can read the password for this level in /etc/bandit_pass/bandit15 using the cat command and then submitting it to port 30001 on localhost.  The difference between this level and level 15 is that you are connecting using TLS encryption here. 
+pbLYuZtTg4MgaqfJx8jbA9gKKGqM68A7
+Here is the commands for this level
+echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" |  openssl s_client -quiet -connect localhost:30001
+
+
+1.	Common mistakes
+2.	 Alternative solutions
+3.	Command breakdowns
+S_client - Starts OpenSSL in SSL/TLS client mode, allowing you to connect to a TLS-enabled server
+Quiet - Suppresses most of OpenSSL's diagnostic output (certificate details, handshake information, etc.), leaving mostly the application data. This makes it easier to interact with the server.
+4.	Linux concept learned
+ 
+kS0Hf0u5HiXFwKMKFqXvPdOTNGGa0X8V
+Level 17
+Link: https://overthewire.org/wargames/bandit/bandit17.html
+Challenge: The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL/TLS and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.
+
+You will login using the same ssh private key and password from the previous level using the below command.
+ssh bandit16@bandit.labs.overthewire.org -p 2220 -i lvl14.key
+You can read the password for this level in /etc/bandit_pass/bandit16 using the cat command
+kS0Hf0u5HiXFwKMKFqXvPdOTNGGa0X8V
+I started by checking which of the ports have servers listening on them using the below Nmap’s command and then checking which one of them speak SSL/TSL and this gave me one successful port which was listening and upon pasting this levels password, I got a private key which I saved in my local machine as lvl17.key .
+nmap -p31000-32000 localhost
+openssl s_client -connect localhost:<port number> (Do this for all port numbers)
+echo "<current_password>" | openssl s_client -quiet -connect localhost:<port number> (insert the one that speaks SSL/TLS)
+
+1.	Common mistakes
+2.	 Alternative solutions
+3.	Command breakdowns
+4.	Linux concept learned
+
+Level 18
+Link: https://overthewire.org/wargames/bandit/bandit18.html
+Challenge: There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new
+
+You will log into this level by using the private key we got from the previous level using the below command:
+Chmod 600 lvl17.key
+ssh bandit17@bandit.labs.overthewire.org -p 2220 -i lvl17.key
+list the files inside it using ls and you’ll see two files, passwords.new and passwords.old.
+Using the below command you should be able to see the difference between  the two passwords and the line marked by a + sign is the next level password.
+diff -u passwords.old passwords.new
+OQxXZjELndr90zuhOTDYBEomI0SZITXI
+
+
+
+1.	Common mistakes
+2.	 Alternative solutions
+3.	Command breakdowns
+4.	Linux concept learned
+
+Level 19
+Link: https://overthewire.org/wargames/bandit/bandit19.html
+Challenge: The password for the next level is stored in a file readme in the homedirectory. Unfortunately, someone has modified .bashrc to log you out when you log in with SSH.
+
+
+Since we are logged out using ssh, using the previous format we’ve been using will print 
+ssh bandit18@bandit.labs.overthewire.org -p 2220 -i lvl17.key
+Byebye !
+Connection to bandit.labs.overthewire.org closed.
+
+Hence, we will log into this level by avoiding to start .bashrc since it has been modified by accessing the bin/sh file directly using the below command:
+ssh -t bandit18@bandit.labs.overthewire.org -p 2220 /bin/sh
+you can read the contents of the readme file and that is the password of the next level.
+KpsOfPkcP7i1FlIExk2QEjyt6dw8dxZI
+
+
+
+1.	Common mistakes
+2.	 Alternative solutions
+3.	Command breakdowns
+-t – starts a pseudo terminal.
+4.	Linux concept learned
+
+Level 20
+Link: https://overthewire.org/wargames/bandit/bandit20.html
+Challenge: To gain access to the next level, you should use the setuid binary in the homedirectory. Execute it without arguments to find out how to use it. The password for this level can be found in the usual place (/etc/bandit_pass), after you have used the setuid binary.
+
+We are going to log into level 19 using the below ssh command and use the password we found in the previous level:
+ssh bandit19@bandit.labs.overthewire.org -p 2220
+For this level, we need to be able to access level 20 to be able to read the password at /etc/bandit_pass. Listing the content of bandit19, we will see there is a setuid file called bandit20-do in it. We will temporarily log in as bandit20-do then access the password at /etc/bandit_pass/bandit20.
+.bandit20-do whoami
+This should tell you, you are bandit20. Next you are going to read the password of bandit20 using the cat command.
+./bandit20-do cat /etc/bandit_pass/bandit20
+4pIjcunZ0fK2vmp3IwfG8Vf7VhxD6pOA
+
+
+1.	Common mistakes
+2.	 Alternative solutions
+3.	Command breakdowns
+4.	Linux concept learned
+
+Level 21
+Link: https://overthewire.org/wargames/bandit/bandit21.html
+Challenge: There is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).
+
+We are going to log into level 20 using the below ssh command and use the password we found in the previous level:
+ssh bandit20@bandit.labs.overthewire.org -p 2220
+Read the password for this level from in /etc/bandit_pass/bandit16 using the cat commands and save it.
+Cat /etc/bandit_pass/bandit21
+4pIjcunZ0fK2vmp3IwfG8Vf7VhxD6pOA
+For this level, we are going to connect to a specific port using a setuid binary and send the above password, if the password matches this level’s password, it will print back the next levels password.
+You are going to open another terminal session and ssh into level 20, in one terminal you are going to start a listening server using the below command and send the password for this level
+nc -l -p 50000
+(50000 is a random unused port number)
+In the second terminal, you are going to connect to the same port using the below command:
+./suconnect 50000
+If the passwords, match, the terminal will print out a password for the next level.
+
+bW9kBv5WC3P4yoDyf12LSdGuNz5ka6hY
+
+1.	Common mistakes
+2.	 Alternative solutions
+3.	Command breakdowns
+4.	Linux concept learned
+
+Level 22
+Link: https://overthewire.org/wargames/bandit/bandit22.html
+Challenge: A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+
+We are going to log into level 19 using the below ssh command and use the password we found in the previous level:
+ssh bandit21@bandit.labs.overthewire.org -p 2220
+For this level, we need to find the location of the cron job and read it’s content by following the below steps:
+First, we list the content of /etc/cron.d/ then print the configuraton for bandit22
+ls /etc/cron.d/
+cat /etc/cron.d/cronjob_bandit22
+
+From the output, we get the location for the user’s cron job at /usr/bin/cronjob_bandit22.sh then read it’s output.
+cat /usr/bin/cronjob_bandit22.sh
+From the olutput, follow the given bash instruction to list out the password in the temporary file
+chmod 644 /tmp/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+cat /tmp/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+RYVux2rHEm9tiXHmLFzuR7Vhx6AZQMEz
+
+
+
+1.	Common mistakes
+Trying to read the content of the temp file while in the /usr/bin/ directory.
+2.	 Alternative solutions
+3.	Command breakdowns
+4.	Linux concept learned
+
+Level 23
+Link: https://overthewire.org/wargames/bandit/bandit23.html
+Challenge: A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+
+We are going to log into level 19 using the below ssh command and use the password we found in the previous level:
+ssh bandit22@bandit.labs.overthewire.org -p 2220
+
+This level is almost like the previous level, with the difference being the cron job invokes is a little bit more involved.
+# List all cron configurations
+ls /etc/cron.d
+# Read out the cron configuration for bandit23
+cat /etc/cron.d/cronjob_bandit23
+
+# Read out the cron job's script:
+cat /usr/bin/cronjob_bandit23.sh
+# Read out the file contents
+Cat /tmp/$mytarget
+Where mytarget=$(echo I am user $myname | md5sum | cut -d ' ' -f 1)
+cat /tmp/$(echo I am user bandit23 | md5sum | cut -d ' ' -f 1)
+
+gKXDTAXnIz3OBxiPjRZ2uqutUlPZrBsw
+
+
+
+
+1.	Common mistakes
+2.	 Alternative solutions
+3.	Command breakdowns
+4.	Linux concept learned
+
+Level 24
+Link:  https://overthewire.org/wargames/bandit/bandit24.html
+Challenge: A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+We are going to log into level 19 using the below ssh command and use the password we found in the previous level:
+ssh bandit23@bandit.labs.overthewire.org -p 2220
+
+In this level, you have to trick a cron job into executing your script instead.
+We will start by creating a shell script using the cat command and the redirecting the output into a temporary file that we create.
+cat > /var/spool/bandit24/foo/cat_passwd <<EOF
+#!/bin/bash
+install --mode=444 /etc/bandit_pass/bandit24 /tmp/bandit_pass_bandit24
+EOF
+We then change the permissions of the file we created and give it 1 minute before we read the output from the bandit_pass_bandit24 file we created earlier
+chmod +x /var/spool/bandit24/foo/cat_passwd
+sleep 60
+cat /tmp/bandit_pass_bandit24
+
+
+
+hVQMk3lJNsmQ7VF3ubyrNNBom7BOgVXv
+
+1.	Common mistakes
+2.	 Alternative solutions
+3.	Command breakdowns
+Install here is used to copy the files and set permissions.
+4.	Linux concept learned
+
+Level 25
+Link: https://overthewire.org/wargames/bandit/bandit25.html
+Challenge: A daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing.
+
+We are going to log into level 19 using the below ssh command and use the password we found in the previous level:
+ssh bandit24@bandit.labs.overthewire.org -p 2220
+Solve this level by connecting to port 30002 on localhost and giving it the right password. The password is a combination of the last level’s password and a random 4 digit pin. The seq command is useful for brute-forcing passwords.
+
+seq -f "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX %4g" 0 9999 |
+    socat STDIO TCP4:localhost:30002 |
+    grep -v Wrong!
+
+
+SoHfqMOEqIX2IYKVciZxvgpR9a2Djx4P
+
+1.	Common mistakes
+2.	 Alternative solutions
+3.	Command breakdowns
+4.	Linux concept learned
+
+Level 26
+Link: https://overthewire.org/wargames/bandit/bandit26.html
+Challenge: Logging in to bandit26 from bandit25 should be fairly easy… The shell for user bandit26 is not /bin/bash, but something else. Find out what it is, how it works and how to break out of it.
+
+We are going to log into level 19 using the below ssh command and use the password we found in the previous level:
+ssh bandit25@bandit.labs.overthewire.org -p 2220
+grep bandit26 /etc/passwd
+cat /usr/bin/showtext
+ssh -i bandit26.sshkey -p 2220 bandit26@bandit.labs.overthewire.org
+# Shrink terminal
+# Press v
+:set shell=/bin/bash
+:shell
+cat /etc/bandit_pass/bandit26
+
+jHdv2ELQhT22BkprMNDjybZDAkw1zeBJ
+
+1.	Common mistakes
+2.	 Alternative solutions
+3.	Command breakdowns
+4.	Linux concept learned
+
+Git level 27 to 31 have identical instructions, as you go, brute force your way reading the README file for sintruction to figure out where the next password could be factoring in this is a git section.
+Level 27
+Link: https://overthewire.org/wargames/bandit/bandit27.html
+Challenge: Good job getting a shell! Now hurry and grab the password for bandit27!
+While stil logged in as user bandit26, you are going to lread bandit27 password using the below command.
+./bandit27-do cat /etc/bandit_pass/bandit27
+
+STJLJBRRphMxKB392CT4iOr5CbzPU9ER
+
+1.	Common mistakes
+2.	 Alternative solutions
+3.	Command breakdowns
+4.	Linux concept learned
+
+Level 28
+Link: https://overthewire.org/wargames/bandit/bandit28.html
+Challenge: There is a git repository at ssh://bandit27-git@bandit.labs.overthewire.org/home/bandit27-git/repo via the port 2220. The password for the user bandit27-git is the same as for the user bandit27.
+
+The goal of this level is to accesss the contents of the git repo given above, we are going to clone it in our local machine and use the password from level 28 to access it using the below command
+git clone ssh://bandit27-git@bandit.labs.overthewire.org:2220/home/bandit27-git/repo
+List the content of the files in the repo folder in your local machine and then read out the password for the next level
+ls repo
+cat repo/README
+
+y8Yd2ssKcpHpud7UvOSOxwamRMzIGIeQ
+
+1.	Common mistakes
+2.	 Alternative solutions
+3.	Command breakdowns
+4.	Linux concept learned
+
+Level 29
+Link: https://overthewire.org/wargames/bandit/bandit29.html
+Challenge: There is a git repository at ssh://bandit28-git@bandit.labs.overthewire.org/home/bandit28-git/repo via the port 2220. The password for the user bandit28-git is the same as for the user bandit28.
+
+This level is similiar to the previous one with the difeference being that the password here was deleted.
+We are going to delete the repo file from our local machine using the command 
+rm -r repo before proceeding to solve for this level.
+We are going to enter the repo folder – same as from the previous level in your local machine – and list out it’s commit history.
+git clone ssh://bandit28-git@bandit.labs.overthewire.org:2220/home/bandit28-git/repo
+cd repo
+git log –oneline
+You will see older commits of the README file
+You can read the content of the commit using git show with the commit number
+git show <commit number>
+Em7eGtqaMySwNFjCpwzzHhLhospOcdt0
+
+
+1.	Common mistakes
+2.	 Alternative solutions
+3.	Command breakdowns
+4.	Linux concept learned
+
+Level 30 
+****research
+Link: https://overthewire.org/wargames/bandit/bandit30.html
+Challenge: There is a git repository at ssh://bandit29-git@bandit.labs.overthewire.org/home/bandit29-git/repo via the port 2220. The password for the user bandit29-git is the same as for the user bandit29.
+From your local machine (not the OverTheWire machine!), clone the repository and find the password for the next level. This needs git installed locally on your machine.
+
+We need to access the contents of the git repo given above, we are going to clone it in our local machine and use the password from level 29 to access it using the below command
+git clone ssh://bandit29-git@bandit.labs.overthewire.org:2220/home/bandit29-git/repo
+
+git branch -a
+git checkout dev
+cat README.md
+jq9Dfg2rXsfYsWMgFuKlXhphjdH7USgX
+
+1.	Common mistakes
+2.	 Alternative solutions
+3.	Command breakdowns
+4.	Linux concept learned
+
+Level 31
+Link: https://overthewire.org/wargames/bandit/bandit31.html
+Challenge: There is a git repository at ssh://bandit30-git@bandit.labs.overthewire.org/home/bandit30-git/repo via the port 2220. The password for the user bandit30-git is the same as for the user bandit30.
+
+git clone ssh://bandit30-git@bandit.labs.overthewire.org:2220/home/bandit30-git/repo
+
+git tag
+git show <filename>
+
+82NkymblpGBYmIXG6ZQ8YldBYstHpfUf
+
+1.	Common mistakes
+2.	 Alternative solutions
+3.	Command breakdowns
+4.	Linux concept learned
+
+Level 32
+Link: https://overthewire.org/wargames/bandit/bandit32.html
+Challenge: There is a git repository at ssh://bandit31-git@bandit.labs.overthewire.org/home/bandit31-git/repo via the port 2220. The password for the user bandit31-git is the same as for the user bandit31.
+
+git clone ssh://bandit31-git@bandit.labs.overthewire.org:2220/home/bandit31-git/repo
+
+cd repo
+cat README.md
+echo "May I come in?" > key.txt
+git add -f key.txt
+
+git commit -m "Adding key.txt"
+git push origin master
+
+pWuj5jBQ6IgV0NXwiH6g1pXRF8S1YvbT
+
+1.	Common mistakes
+2.	 Alternative solutions
+3.	Command breakdowns
+4.	Linux concept learned
+
+Level 33
+Link: https://overthewire.org/wargames/bandit/bandit33.html
+Challenge: After all this git stuff, it’s time for another escape. Good luck!
+In this level, you need to escape a custom shell that turns all commands into uppercase. For example, when you run cat, the shell turns it into a CAT.
+Connect to this level using ssh:
+ssh bandit32@bandit.labs.overthewire.org -p 2220
+Here’s what you’re prompted with when connecting:
+$0
+whoami
+ls
+cat /etc/bandit_pass/bandit33
+The output for bandit33 is the password for the next level.
+
+u4P2CyPOwPGLe94RdD9Uo2FxFwvnFswM
+
+1.	Common mistakes
+2.	 Alternative solutions
+3.	Command breakdowns
+4.	Linux concept learned
+
+
+
+
+
 
 
 
