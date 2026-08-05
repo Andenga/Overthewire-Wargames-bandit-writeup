@@ -6,13 +6,13 @@ This article is a write-up of the [overthewire bandit wargame](https://overthewi
 
 The Bandit game is free and does not need any subscription fee or payment of any form. You can support the site by [donating](https://overthewire.org/information/donate.html) and here are the [rules to consider while playing the game](https://overthewire.org/rules/).
 
-I have eradicated the passwords of the next levels using this format (xxxx.........xxxx)
+I have eradicated the passwords of the next levels using this format (**********)
 
 ## Level 0
 
 Link to this level: https://overthewire.org/wargames/bandit/bandit0.html
 
-To solve level 0, you need to log into bandit0 with the password bandit0 using SSH on bandit.labels.overthewrite.org and port 2220.
+To solve level 0, you need to log into bandit0 with the password **bandit0** using SSH on bandit.labels.overthewrite.org and port 2220.
 
 Connect with ssh by using the following command:
 
@@ -39,12 +39,13 @@ Whenever you find a password for a level, save it in a separate file and use SSH
 
 ssh – This is a protocol used to securely connect to another computer over a network.
 
-###	Linux concept learned
-ssh
 
 ## Level 1
 
-Link: https://overthewire.org/wargames/bandit/bandit1.html
+Link to this level: https://overthewire.org/wargames/bandit/bandit1.html
+
+For this level, you need to find the password located in the readme file in the home directory.
+
 
 Log into this level by using the below command
 
@@ -52,14 +53,19 @@ Log into this level by using the below command
 ssh bandit0@bandit.labs.overthewire.org -p 2220
 ```
 
-The password is the same as level 0: bandit0
+The password is the same as level 0: **bandit0**
 
-List out the contents of the file using ls
-ls
+List out the contents of the file using ls.
+
+`ls`
+
 There is a readme file in it, read out it’s content using cat to find the password.
-Cat
+
+`Cat`
+
 It will print the following
-*****
+
+````python
 Congratulations on your first steps into the bandit game!!
 Please make sure you have read the rules at https://overthewire.org/rules/
 If you are following a course, workshop, walkthrough or other educational activity,
@@ -67,9 +73,7 @@ please inform the instructor about the rules as well and encourage them to
 contribute to the OverTheWire community so we can keep these games free!
 
 The password you are looking for is: ************
-*****
-Password : 
-6y2kwnwK6grgvwvpvLaa2T1cpFEKOhNR
+````
 
 1.	 Alternative solutions
 Ls – dir, find
