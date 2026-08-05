@@ -4,5 +4,8 @@ theme:
 
 nav:
   - Home: index.md
-  - My Page: somefile.
+  - My Page: somefile
+  - Over the Wire Bandit Write Up
+
+
   
