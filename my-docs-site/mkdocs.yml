@@ -2,7 +2,10 @@ site_name: Overthewire Bandit interactive write-up
 
 theme:
   name: material
-  custom_dir: overrides
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
 
 
 markdown_extensions:
@@ -14,6 +17,13 @@ markdown_extensions:
 extra_css:
   - stylesheets/extra.css
 
-
-
-
+nav:
+  - Home: index.md
+  - Categories:
+      - SSH login & file basics (0–5): index.md#level-0
+      - Searching and filtering (6–10): index.md#level-6
+      - Encoding and transformations (11–13): index.md#level-11
+      - Networking basics (14–17): index.md#level-14
+      - SSH and restricted shells (18–20): index.md#level-18
+      - Automation and cron jobs (21–26): index.md#level-21
+      - Git and source control (27–34): index.md#level-27
