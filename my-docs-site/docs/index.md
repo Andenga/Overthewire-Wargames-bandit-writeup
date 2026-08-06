@@ -1,7 +1,7 @@
 # Over the Wire Bandit Write Up
 
 ![Introduction to bandit wargame
-](/Images/image0.png)
+](image0.png)
 ## Introduction
 
 This article is a write-up of the [overthewire bandit wargame](https://overthewire.org/wargames/bandit/). The bandit wargame is a series in the war games on the [Overthewire](https://overthewire.org/wargames/) website that helps one learn Linux from begginers level to expertise. It contains a series of levels, each one a Linux server you log into where you find the password for the next level. 
@@ -10,7 +10,7 @@ The Bandit wargame game is free and does not need any subscription fee or paymen
 
 I have eradicated the passwords for the next levels where necessary using this format (***********************)
 
-## Level 0 {: #level-0 }
+## Level 0
 
 Link to this level: [https://overthewire.org/wargames/bandit/bandit0.html](https://overthewire.org/wargames/bandit/bandit0.html)
 
@@ -24,7 +24,7 @@ ssh bandit0@bandit.labs.overthewire.org -p 222
 ```
 Once it is connected you will see the below output
 
-![Welcome message](/Images/image.png)
+![Welcome message](image.png)
 
 
 ### Common mistakes

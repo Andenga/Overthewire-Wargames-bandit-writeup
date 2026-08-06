@@ -23,7 +23,6 @@ site_name: Overthewire Bandit interactive write-up
 
 theme:
   name: material
-  custom_dir: overrides
 
 
 markdown_extensions:
