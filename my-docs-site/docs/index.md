@@ -10,7 +10,7 @@ The Bandit wargame game is free and does not need any subscription fee or paymen
 
 I have eradicated the passwords for the next levels where necessary using this format (***********************)
 
-## Level 0
+## Level 0 {: #level-0 }
 
 Link to this level: [https://overthewire.org/wargames/bandit/bandit0.html](https://overthewire.org/wargames/bandit/bandit0.html)
 
