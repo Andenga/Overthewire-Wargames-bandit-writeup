@@ -1,10 +1,19 @@
-site_name: My Docs Site
+site_name: Overthewire Bandit interactive write-up
+
 theme:
   name: material
 
+markdown_extensions:
+  - toc:
+      permalink: true
+      toc_depth: 2
+
+extra_css:
+  - stylesheets/extra.css
+  
 nav:
   - Home: index.md
-  - Level 0 ssh login basics: level 0
+  - Level 0 ssh login basics: index.md
   - File navigation & inspection: level 0–5
   - Searching and filtering: level 5–9
   - Encoding and transformations: level 9–13
