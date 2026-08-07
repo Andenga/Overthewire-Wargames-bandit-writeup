@@ -6,13 +6,6 @@ This is an interactive write-up containing my solutions and notes for **OverTheW
 
 [Bandit](https://overthewire.org/wargames/bandit/) is a Linux wargame that teaches the fundamentals of Linux command-line and security concepts taking the user from beginner level to expert. 
 
-## 🚀 Getting Started
-
-### Prerequisites
-- SSH client (OpenSSH recommended)
-- Linux/Unix terminal or WSL for Windows users
-- Basic understanding of command-line operations
-
 
 ## 🎯 Learning Objectives
 
