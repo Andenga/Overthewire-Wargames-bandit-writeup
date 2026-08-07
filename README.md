@@ -1,48 +1,44 @@
-Over the Wire Bandit Write Up
-6–10	Searching and filtering
+# OverTheWire Bandit Wargame - Interactive Write-up
 
-11–13	Encoding and transformations
+This is an interactive write-up containing my solutions and notes for **OverTheWire's Bandit wargame**. This repository documents my journey from level 0 to level 34, providing detailed explanations and commands for each challenge.
 
-14–17	Networking basics
+## 📖 About the Bandit Wargame
 
-18–20	SSH and restricted shells
+[Bandit](https://overthewire.org/wargames/bandit/) is a Linux wargame that teaches the fundamentals of Linux command-line and security concepts taking the user from beginner level to expert. 
 
-21–26	Automation and cron jobs
+## 🚀 Getting Started
 
-27–34	Git and source control
-
-  - 6–10	Searching and filtering
-  - 11–13	Encoding and transformations
-  - 14–17	Networking basics
-  - 18–20	SSH and restricted shells
-  - 21–26	Automation and cron jobs
-  - 27–34	Git and source control
+### Prerequisites
+- SSH client (OpenSSH recommended)
+- Linux/Unix terminal or WSL for Windows users
+- Basic understanding of command-line operations
 
 
-site_name: Overthewire Bandit interactive write-up
+## 🎯 Learning Objectives
 
-theme:
-  name: material
+After completing this wargame, you will have gained practical experience with:
+
+- **Linux Command Line**: Navigation, file manipulation, text processing
+- **Security Concepts**: Authentication, authorization, privilege escalation
+- **Network Basics**: Port scanning, netcat, SSH tunneling
+- **System Administration**: Cron jobs, process management, file permissions
+- **Problem-Solving**: Combining tools to overcome security restrictions
+
+## 📝 Approach
+
+The level solution includes:
+1. **Objective**: What needs to be accomplished
+2. **Methodology**: Step-by-step reasoning and commands
+3. **Command Breakdowns**: Essential commands with explanations
+4. **Alternative solutions**: It gives the user alternative commands they can use.
+4. **Mistakes**: This highlights common mistakes and challenges I faced while solving the levels
 
 
-markdown_extensions:
-  - attr_list
-  - toc:
-      permalink: true
-      toc_depth: 2
+## 🙏 Acknowledgments
 
-extra_css:
-  - stylesheets/extra.css
+- **[OverTheWire Community](https://overthewire.org/wargames/)** - For creating and maintaining this excellent wargame
 
-  nav:
-  - Home: index.md
-  - Categories:
-    - SSH login basics: index.md#level-0
-    - File navigation & inspection: index.md#level-3
-    - Searching and filtering: index.md#level-6
-    - Encoding and transformations: index.md#level-8
-    - SSH keys, networking basics, and diffing files: index.md#level-14
-    - Restricted shells and setuid basics: index.md#level-19
-    - Cron jobs, brute-forcing, and shell escapes: index.md#level-22
-    - Git and source control: index.md#level-28
-    - Restricted shell / sandbox escape: index.md#level-32
+
+> **Note**: This repository is intended for educational purposes only. Please attempt the challenges on your own before consulting these solutions.
+
+**Happy Hacking!** 🐧🔐

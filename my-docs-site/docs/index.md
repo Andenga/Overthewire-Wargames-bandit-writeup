@@ -1,6 +1,5 @@
 # Over the Wire Bandit Write Up
-
-
+****
 
 ![Introduction to bandit wargame
 ](image0.png)
