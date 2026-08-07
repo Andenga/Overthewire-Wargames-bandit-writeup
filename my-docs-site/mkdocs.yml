@@ -19,4 +19,10 @@ extra_css:
 
 nav:
   - Home: index.md
-  - Github repo: https://github.com/Andenga/Overthewire-Wargames-bandit-writeup
+  - Cheatsheets:
+      - Linux commands: https://pin.it/4SyteJ6Je
+      - Linux permissions: https://pin.it/7KK8RVwpE
+  - Connect:
+      - LinkedIn: https://www.linkedin.com/in/lydiaandenga/
+      - Github: https://github.com/Andenga
+      

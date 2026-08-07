@@ -1,5 +1,7 @@
 # Over the Wire Bandit Write Up
 
+
+
 ![Introduction to bandit wargame
 ](image0.png)
 ## Introduction
@@ -9,6 +11,17 @@ This article is a write-up of the [overthewire bandit wargame](https://overthewi
 The Bandit wargame game is free and does not need any subscription fee or payment of any form. You can support the site by [donating](https://overthewire.org/information/donate.html) and here are the [rules to consider while playing the game](https://overthewire.org/rules/).
 
 I have eradicated the passwords for the next levels where necessary using this format (***********************)
+
+## Categories
+- [SSH login & file basics (0–5)](#level-0)
+- [Searching and filtering (6–10)](#level-6)
+- [Encoding and transformations (11–13)](#level-11)
+- [Networking basics (14–17)](#level-14)
+- [SSH and restricted shells (18–20)](#level-18)
+- [Automation and cron jobs (21–24)](#level-21)
+- [Restricted shell escapes (25–26)](#level-25)
+- [Git and source control (27–34)](#level-27)
+
 
 ## Level 0
 
